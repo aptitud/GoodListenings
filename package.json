@@ -1,0 +1,23 @@
+{
+  "name": "GoodListenings",
+  "version": "0.0.1",
+  "description": "Helps users find the most recommended podcasts, conference recordings & videocasts by friends...",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -u bdd -b -R spec --recursive"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aptitud/GoodListenings.git"
+  },
+  "author": "Aptitud",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aptitud/GoodListenings/issues"
+  },
+  "homepage": "https://github.com/aptitud/GoodListenings"
+}
