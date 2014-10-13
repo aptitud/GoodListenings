@@ -10,14 +10,15 @@ module.exports = function(app, passport) {
 
 	// route for showing the profile page
 	app.get('/profile', isLoggedIn, function(req, res) {
-		res.render('profile.ejs', {
+		console.log(req.user);
+		res.render('profile.jade', {
 			user: req.user // get the user out of session and pass to template
 		});
 	});
 
 	// route for facebook authentication and login
 	app.get('/auth/facebook', passport.authenticate('facebook', {
-		scope: 'email'
+		scope: 'user_friends,email'
 	}));
 
 	// handle the callback after facebook has authenticated the user

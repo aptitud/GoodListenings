@@ -1,5 +1,5 @@
 var facebookStrategy = require('passport-facebook').Strategy,
-	user = require('../app/models/user'),
+	dbUser = require('../app/models/user'),
 	config = require('./index')();
 
 module.exports = function(passport) {
@@ -11,11 +11,11 @@ module.exports = function(passport) {
 
 	// used to deserialize the user
 	passport.deserializeUser(function(id, done) {
-		User.findById(id, function(err, user) {
+		dbUser.findById(id, function(err, user) {
 			done(err, user);
 		});
 	});
-	console.log(config);
+
 	passport.use(new facebookStrategy({
 			clientID: config.authentication.clientID,
 			clientSecret: config.authentication.clientSecret,
@@ -28,7 +28,7 @@ module.exports = function(passport) {
 			process.nextTick(function() {
 
 				// find the user in the database based on their facebook id
-				User.findOne({
+				dbUser.findOne({
 					'facebook.id': profile.id
 				}, function(err, user) {
 
@@ -42,7 +42,7 @@ module.exports = function(passport) {
 						return done(null, user); // user found, return that user
 					} else {
 						// if there is no user found with that facebook id, create them
-						var newUser = new User();
+						var newUser = new dbUser();
 
 						// set all of the facebook information in our user model
 						newUser.facebook.id = profile.id; // set the users facebook id	                
